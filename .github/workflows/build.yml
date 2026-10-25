@@ -25,4 +25,13 @@ jobs:
           gradle-version: '8.7'
 
       - name: Build the APK
-        working-direct
+        run: |
+          cd game
+          gradle assembleRelease --no-daemon
+
+      - name: Keep the APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: PixelDice-APK
+          path: game/app/build/outputs/apk/release/PixelDice.apk
+          if-no-files-found: error
